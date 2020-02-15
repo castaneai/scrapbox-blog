@@ -8,7 +8,7 @@ export default async (req, res) => {
   const uriBase = `https://scrapbox.io/api/pages/${projectName}`;
   if (!title) {
     const apiRes = await fetch(`${uriBase}?sort=created`);
-    const pages = (await apiRes.json()).pages;
+    const pages = (await apiRes.json()).pages.filter(page => page.pin === 0);
     res.status(200).json(pages);
     return;
   }

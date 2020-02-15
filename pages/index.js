@@ -7,16 +7,14 @@ const Index = props => (
   <div>
     <h1>{process.env.projectName}</h1>
     <ul>
-      {props.posts
-        .filter(post => post.pin === 0)
-        .map(post => (
-          <li key={post.id}>
-            <span>{moment.unix(post.created).format("YYYY/MM/DD")}</span>
-            <Link href="/[title]" as={`/${post.title}`}>
-              <a>{post.title}</a>
-            </Link>
-          </li>
-        ))}
+      {props.posts.map(post => (
+        <li key={post.id}>
+          <span>{moment.unix(post.created).format("YYYY/MM/DD")}</span>
+          <Link href="/posts/[title]" as={`/posts/${post.title}`}>
+            <a>{post.title}</a>
+          </Link>
+        </li>
+      ))}
     </ul>
   </div>
 );

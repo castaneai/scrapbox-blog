@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import Link from "next/link";
-import { apiUrl } from "../util";
+import { apiUrl } from "../../util";
 
 function randomKey() {
   return Math.random()
@@ -20,6 +20,9 @@ const parseNode = node => {
           {node.href}
         </a>
       );
+    case "quote":
+      return <blockquote key={key}>{node.nodes.map(parseNode)}</blockquote>;
+    case "strong":
     case "decoration":
       return (
         <span key={key}>
@@ -66,8 +69,6 @@ Post.getInitialProps = async ctx => {
     apiUrl(`/api/posts?title=${encodeURIComponent(title)}`, ctx.req)
   );
   const data = await res.json();
-
-  console.log(`fetched page: ${title}`);
   return { data };
 };
 
