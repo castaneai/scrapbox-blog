@@ -10,29 +10,37 @@ function randomKey() {
 }
 
 const parseNode = node => {
+  const key = randomKey();
   switch (node.type) {
     case "plain":
-      return <span key={randomKey()}>{node.text}</span>;
+      return <span key={key}>{node.text}</span>;
     case "link":
       return (
-        <a key={randomKey()} href={node.href}>
+        <a key={key} href={node.href}>
           {node.href}
         </a>
       );
-    case "image":
+    case "decoration":
       return (
-        <img key={randomKey()} src={node.src} style={{ maxWidth: "400px" }} />
+        <span key={key}>
+          <strong>{node.nodes.map(parseNode)}</strong>
+        </span>
       );
-
+    case "image":
+      return <img key={key} src={node.src} style={{ maxWidth: "400px" }} />;
     case "hashTag":
       return (
-        <Link href="/[title]" as={`/${node.href}`}>
+        <Link key={key} href="/[title]" as={`/${node.href}`}>
           <a>{node.href}</a>
         </Link>
       );
+    case "code":
+      return <code key={key}>{node.text}</code>;
+    case "icon":
+      return <img key={key} width="16" height="16" />;
     default:
       return (
-        <span key={randomKey()}>
+        <span key={key}>
           unknown node: <code>{JSON.stringify(node)}</code>
         </span>
       );
