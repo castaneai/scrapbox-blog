@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@progfay/scrapbox-parser": "^4.0.0-0",
+    "@progfay/scrapbox-parser": "^6.0.3",
     "isomorphic-unfetch": "^3.0.0",
     "moment": "^2.24.0",
     "next": "^9.3.2",
